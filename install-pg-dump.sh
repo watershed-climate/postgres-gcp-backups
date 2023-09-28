@@ -13,12 +13,9 @@ if [[ "$POSTGRES_VERSION" != @(11|12|13|14) ]]; then
   exit 1
 fi
 
-cat <<EOF > /etc/yum.repos.d/pgdg.repo
-[pgdg$POSTGRES_VERSION]
-name=PostgreSQL $POSTGRES_VERSION for RHEL/CentOS 7 - x86_64
-baseurl=http://download.postgresql.org/pub/repos/yum/$POSTGRES_VERSION/redhat/rhel-7-x86_64
-enabled=1
-gpgcheck=0
-EOF
+# Postgres 14 is not available by default so we need to add the repo
+echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
+curl https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+apt-get update
 
-yum install postgresql$POSTGRES_VERSION -y
+apt-get install -y postgresql-$POSTGRES_VERSION
