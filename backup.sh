@@ -15,6 +15,8 @@ gcloud auth activate-service-account --key-file=$GCS_AUTH_KEY_FILE \
 # Set statement_timeout to 0 to prevent the dump from timing out
 export PGOPTIONS="-c statement_timeout=0"
 
+exit 1
+
 pg_dump --no-owner --no-privileges --clean --if-exists --quote-all-identifiers \
   -n public "$DATABASE_URL" \
   | gzip \
