@@ -2,6 +2,9 @@
 
 set -o errexit -o nounset -o pipefail
 
+# From https://blog.sentry.io/sentry-bash/
+eval "$(sentry-cli bash-hook)"
+
 filename="$(date +%Y-%m-%dT%H-%MZ.sql.gz)"
 
 echo "Backing up Postgres database into GCS file $filename..."

@@ -18,3 +18,5 @@ services:
         value: watershed-postgres-backups/render
       - key: GCS_AUTH_KEY_FILE
         value: /etc/secrets/watershed-security-and-privacy-c8aceb9e2392.json
+      - key: SENTRY_DSN
+        sync: false
