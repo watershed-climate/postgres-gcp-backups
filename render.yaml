@@ -1,7 +1,7 @@
 services:
   - name: backup-postgres
     type: cron
-    schedule: "0 4 * * *" # 4am UTC, 9pm PST
+    schedule: "0 6 * * *" # 6am UTC, 10pm PST
     region: oregon
     env: docker
     plan: standard
