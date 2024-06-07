@@ -15,7 +15,7 @@ services:
           name: watershed_production_14
           property: connectionString
       - key: GCS_BUCKET_NAME
-        value: watershed-postgres-backups/render
+        value: watershed-postgres-backups/render/regional_us
       - key: GCS_AUTH_KEY_FILE
         value: /etc/secrets/watershed-security-and-privacy-c8aceb9e2392.json
       - key: SENTRY_DSN
