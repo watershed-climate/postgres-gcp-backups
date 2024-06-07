@@ -20,3 +20,26 @@ services:
         value: /etc/secrets/watershed-security-and-privacy-c8aceb9e2392.json
       - key: SENTRY_DSN
         sync: false
+
+services:
+  - name: backup-global-postgres
+    type: cron
+    schedule: "0 4 * * *" # 4am UTC, 9pm PST
+    region: oregon
+    env: docker
+    plan: standard
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+    envVars:
+      - key: POSTGRES_VERSION
+        value: 14
+      - key: DATABASE_URL
+        fromDatabase:
+          name: watershed_global_14
+          property: connectionString
+      - key: GCS_BUCKET_NAME
+        value: watershed-postgres-backups/render/global
+      - key: GCS_AUTH_KEY_FILE
+        value: /etc/secrets/watershed-security-and-privacy-c8aceb9e2392.json
+      - key: SENTRY_DSN
+        sync: false
