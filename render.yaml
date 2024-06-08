@@ -21,7 +21,6 @@ services:
       - key: SENTRY_DSN
         sync: false
 
-services:
   - name: backup-global-postgres
     type: cron
     schedule: "0 4 * * *" # 4am UTC, 9pm PST
