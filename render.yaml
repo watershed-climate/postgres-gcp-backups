@@ -59,7 +59,7 @@ services:
           name: watershed_eu
           property: connectionString
       - key: GCS_BUCKET_NAME
-        value: watershed-postgres-backups/render/regional_eu
+        value: watershed-postgres-backups-eu/render/regional_eu
       - key: GCS_AUTH_KEY_FILE
         value: /etc/secrets/watershed-security-and-privacy-32d577009d19.json
       - key: SENTRY_DSN
