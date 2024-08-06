@@ -1,7 +1,7 @@
 services:
   - name: backup-postgres
     type: cron
-    schedule: "0 6 * * *" # 6am UTC, 10pm PST
+    schedule: "0 6 * * *" # 6am UTC, 11pm PST
     region: oregon
     env: docker
     plan: standard
@@ -40,5 +40,27 @@ services:
         value: watershed-postgres-backups/render/global
       - key: GCS_AUTH_KEY_FILE
         value: /etc/secrets/watershed-security-and-privacy-c8aceb9e2392.json
+      - key: SENTRY_DSN
+        sync: false
+
+  - name: backup-eu-postgres
+    type: cron
+    schedule: "0 6 * * *" # 6am UTC, 11pm PST
+    region: frankfurt
+    env: docker
+    plan: standard
+    dockerfilePath: ./Dockerfile
+    autoDeploy: false
+    envVars:
+      - key: POSTGRES_VERSION
+        value: 14
+      - key: DATABASE_URL
+        fromDatabase:
+          name: watershed_eu
+          property: connectionString
+      - key: GCS_BUCKET_NAME
+        value: watershed-postgres-backups/render/regional_eu
+      - key: GCS_AUTH_KEY_FILE
+        value: /etc/secrets/watershed-security-and-privacy-32d577009d19.json
       - key: SENTRY_DSN
         sync: false
