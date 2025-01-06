@@ -16,7 +16,7 @@ gcloud auth activate-service-account --key-file=$GCS_AUTH_KEY_FILE \
 export PGOPTIONS="-c statement_timeout=0"
 
 pg_dump --no-owner --no-privileges --quote-all-identifiers \
-  -n public "$DATABASE_URL" \
+  "$DATABASE_URL" \
   | gzip \
   | gcloud storage cp - "gs://$GCS_BUCKET_NAME/$filename"
 
